@@ -1,0 +1,30 @@
+{% extends "mascotas/base.html" %}
+
+{% block body %}
+    <h3 class="text-center m-4">Registrar Nueva Mascota</h3>
+    
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            ¡La nueva mascota fue agregada exitosamente! 🎉
+            <a href="{% url 'index' %}" class="alert-link">Volver a la Lista de Mascotas.</a>
+        </div>
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">
+                        <i class="fa-solid fa-plus fa-lg"></i> Registro de Mascotas
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'add' %}" method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }} 
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                            <a href="{% url 'index' %}" class="btn btn-secondary">Cancelar</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
